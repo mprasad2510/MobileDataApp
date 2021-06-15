@@ -61,6 +61,7 @@ class MobileDataAdapter(private var mobileData: List<RecordsItem>) :
                 }
             }
         }
+        return true
     }
 
     private fun findMinValueOfData(position : Int) : Boolean {

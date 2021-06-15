@@ -1,6 +1,5 @@
 package com.android.myapplication.view
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.android.myapplication.R
-import com.android.myapplication.model.MobileData
 import com.android.myapplication.model.RecordsItem
 import kotlinx.android.synthetic.main.row_records.view.*
 
@@ -24,6 +22,11 @@ class MobileDataAdapter(private var mobileData: List<RecordsItem>) :
 
     override fun onBindViewHolder(vh: MViewHolder, position: Int) {
         vh.bind(mobileData[position])
+        if (findMinValueOfData(position)) {
+            vh.imageView.isClickable = true
+        } else {
+            vh.imageView.visibility = View.GONE
+        }
     }
 
     override fun getItemCount(): Int {
@@ -37,12 +40,17 @@ class MobileDataAdapter(private var mobileData: List<RecordsItem>) :
 
     class MViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val textViewName: TextView = view.textViewName
-        private val imageView: ImageView = view.imageView
+        val imageView: ImageView = view.imageView
         fun bind(data: RecordsItem) {
             textViewName.text = data.volume_of_mobile_data
-            Log.d(MobileDataActivity.TAG, "data $data")
-            Log.d(MobileDataActivity.TAG, "data 2 ${data.volume_of_mobile_data}")
-            imageView.isClickable = true
         }
+    }
+
+    private fun findMinValueOfData(position : Int) : Boolean {
+        val listData = arrayOf(mobileData[position].volume_of_mobile_data)
+        val minimum = listData.toList()
+        println("Minimum: ${minimum.minOrNull()}")
+        return true
+
     }
 }

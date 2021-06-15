@@ -22,6 +22,7 @@ class MobileDataAdapter(private var mobileData: List<RecordsItem>) :
 
     override fun onBindViewHolder(vh: MViewHolder, position: Int) {
         vh.bind(mobileData[position])
+        getDataAnnually(position)
         if (findMinValueOfData(position)) {
             vh.imageView.isClickable = true
         } else {
@@ -43,6 +44,22 @@ class MobileDataAdapter(private var mobileData: List<RecordsItem>) :
         val imageView: ImageView = view.imageView
         fun bind(data: RecordsItem) {
             textViewName.text = data.volume_of_mobile_data
+        }
+    }
+
+    private fun getDataAnnually(position: Int) : Boolean {
+        mobileData[position].quarter?.forEach { parentItem ->
+            val value = mobileData[position].quarter?.substring(0, 3)
+            val buffer = StringBuffer()
+            for ((j, childItem) in mobileData[position].quarter?.withIndex()!!) {
+
+                if (mobileData[position].quarter!!.contains(value.toString())) {
+                    if (j == mobileData[position].quarter!!.length - 1)
+                        buffer.append(mobileData[position].quarter)
+                    else
+                        buffer.append(mobileData[position].quarter).append(",")
+                }
+            }
         }
     }
 

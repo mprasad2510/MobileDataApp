@@ -84,19 +84,4 @@ class MobileDataActivity : AppCompatActivity() {
         const val TAG = "MobileDataActivity"
     }
 
-    fun getDataAnnually() {
-        viewModel.mobileData.value?.forEach { parentItem ->
-            val value = parentItem.quarter?.substring(0, 3)
-            val buffer = StringBuffer()
-            for ((j, childItem) in viewModel.mobileData.value?.withIndex()!!) {
-
-                if (childItem.quarter!!.contains(value.toString())) {
-                    if (j == viewModel.mobileData.value!!.size - 1)
-                        buffer.append(childItem.quarter)
-                    else
-                        buffer.append(childItem.quarter).append(",")
-                }
-            }
-        }
-    }
 }

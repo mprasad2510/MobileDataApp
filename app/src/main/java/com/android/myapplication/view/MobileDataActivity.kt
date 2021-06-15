@@ -30,8 +30,6 @@ class MobileDataActivity : AppCompatActivity() {
 
     //ui
     private fun setupUI() {
-        // read value from buffer
-        //for ((i,item) in viewModel.mobileData.value?.withIndex()!!)
         adapter = MobileDataAdapter(viewModel.mobileData.value ?: emptyList())
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter

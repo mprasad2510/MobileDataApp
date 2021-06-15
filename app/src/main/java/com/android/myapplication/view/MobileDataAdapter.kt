@@ -39,9 +39,9 @@ class MobileDataAdapter(private var mobileData: List<RecordsItem>) :
         private val textViewName: TextView = view.textViewName
         private val imageView: ImageView = view.imageView
         fun bind(data: RecordsItem) {
-            textViewName.text = data.volumeOfMobileData.toString()
+            textViewName.text = data.volume_of_mobile_data
             Log.d(MobileDataActivity.TAG, "data $data")
-            Log.d(MobileDataActivity.TAG, "data 2 ${data.volumeOfMobileData.toString()}")
+            Log.d(MobileDataActivity.TAG, "data 2 ${data.volume_of_mobile_data}")
             imageView.isClickable = true
         }
     }

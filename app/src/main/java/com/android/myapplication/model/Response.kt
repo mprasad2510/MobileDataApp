@@ -8,7 +8,7 @@ data class Response(
 
 data class Result(
 	val total: Int? = null,
-	val records: List<RecordsItem>? = null,
+	val records: List<RecordsItem>,
 	val links: Links? = null,
 	val limit: Int? = null,
 	val resourceId: String? = null,
@@ -21,8 +21,8 @@ data class Links(
 )
 
 data class RecordsItem(
-	val volumeOfMobileData: String? = null,
-	val id: Int? = null,
+	val volume_of_mobile_data: String,
+	val _id: Int? = null,
 	val quarter: String? = null
 )
 

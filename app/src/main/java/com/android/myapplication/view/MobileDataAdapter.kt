@@ -42,8 +42,7 @@ class MobileDataAdapter(private var mobileData: List<RecordsItem>) :
             textViewName.text = data.volumeOfMobileData.toString()
             Log.d(MobileDataActivity.TAG, "data $data")
             Log.d(MobileDataActivity.TAG, "data 2 ${data.volumeOfMobileData.toString()}")
-
-            //Glide.with(imageView.context).load(museum.photo).into(imageView)
+            imageView.isClickable = true
         }
     }
 }

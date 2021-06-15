@@ -2,8 +2,6 @@ package com.android.myapplication.data
 
 
 import android.util.Log
-import com.android.myapplication.BuildConfig.DEBUG
-import com.android.myapplication.model.MobileData
 import com.android.myapplication.model.MobileDataSource
 import retrofit2.Call
 import retrofit2.Callback

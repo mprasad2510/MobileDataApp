@@ -19,7 +19,7 @@ import org.mockito.*
 import org.mockito.Mockito.*
 
 
-class MVVMUnitTest {
+class MobileDataViewModelTest {
 
     @Mock
     private lateinit var mobileDataRemoteDataSource: MobileDataRemoteDataSource

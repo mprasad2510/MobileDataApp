@@ -1,13 +1,14 @@
-package com.android.myapplication.data
+package com.android.myapplication.viewmodel
 
 import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.android.myapplication.capture
+import com.android.myapplication.data.MobileDataRemoteDataSource
+import com.android.myapplication.data.OperationCallback
 import com.android.myapplication.model.MobileDataRepository
 import com.android.myapplication.model.RecordsItem
 import com.android.myapplication.model.Response
-import com.android.myapplication.viewmodel.MobileDataViewModel
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule

@@ -11,7 +11,8 @@ import com.android.myapplication.model.RecordsItem
 import kotlinx.android.synthetic.main.row_records.view.*
 
 
-class MobileDataAdapter(private var mobileData: List<RecordsItem>) :
+class MobileDataAdapter(private var mobileData: List<RecordsItem>,
+private var annualData: Map<String,String>, private var minVal: Boolean) :
     RecyclerView.Adapter<MobileDataAdapter.MViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): MViewHolder {
@@ -22,11 +23,13 @@ class MobileDataAdapter(private var mobileData: List<RecordsItem>) :
 
     override fun onBindViewHolder(vh: MViewHolder, position: Int) {
         vh.bind(mobileData[position])
-        getDataAnnually(position)
-        if (findMinValueOfData(position)) {
+        val data = annualData.getValue("quarter")
+        vh.txtQuarter.text = data
+        if (minVal) {
             vh.imageView.isClickable = true
+            vh.imageView.visibility = View.VISIBLE
         } else {
-            vh.imageView.visibility = View.GONE
+           vh.imageView.visibility = View.GONE
         }
     }
 
@@ -40,35 +43,11 @@ class MobileDataAdapter(private var mobileData: List<RecordsItem>) :
     }
 
     class MViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val textViewName: TextView = view.textViewName
+        val textViewName: TextView = view.textViewName
         val imageView: ImageView = view.imageView
+        val txtQuarter = view.textViewLink
         fun bind(data: RecordsItem) {
             textViewName.text = data.volume_of_mobile_data
         }
-    }
-
-    private fun getDataAnnually(position: Int) : Boolean {
-        mobileData[position].quarter?.forEach { parentItem ->
-            val value = mobileData[position].quarter?.substring(0, 3)
-            val buffer = StringBuffer()
-            for ((j, childItem) in mobileData[position].quarter?.withIndex()!!) {
-
-                if (mobileData[position].quarter!!.contains(value.toString())) {
-                    if (j == mobileData[position].quarter!!.length - 1)
-                        buffer.append(mobileData[position].quarter)
-                    else
-                        buffer.append(mobileData[position].quarter).append(",")
-                }
-            }
-        }
-        return true
-    }
-
-    private fun findMinValueOfData(position : Int) : Boolean {
-        val listData = arrayOf(mobileData[position].volume_of_mobile_data)
-        val minimum = listData.toList()
-        println("Minimum: ${minimum.minOrNull()}")
-        return true
-
     }
 }

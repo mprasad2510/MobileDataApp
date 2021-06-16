@@ -8,19 +8,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.myapplication.R
-import com.android.myapplication.di.Injection
-import com.android.myapplication.model.MobileData
+import com.android.myapplication.di.AppModule
 import com.android.myapplication.model.RecordsItem
 import com.android.myapplication.viewmodel.MobileDataViewModel
 import kotlinx.android.synthetic.main.activity_records.*
 import kotlinx.android.synthetic.main.layout_error.*
+
 
 class MobileDataActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MobileDataViewModel
     private lateinit var adapter: MobileDataAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_records)
 
@@ -30,7 +30,7 @@ class MobileDataActivity : AppCompatActivity() {
 
     //ui
     private fun setupUI() {
-        adapter = MobileDataAdapter(viewModel.mobileData.value ?: emptyList())
+        adapter = MobileDataAdapter(viewModel.mobileData.value ?: emptyList(), viewModel.getDataAnnually(),viewModel.findMinValueOfData())
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
     }
@@ -39,7 +39,7 @@ class MobileDataActivity : AppCompatActivity() {
     private fun setupViewModel() {
         viewModel = ViewModelProvider(
             this,
-            Injection.provideViewModelFactory()
+            AppModule.provideViewModelFactory()
         ).get(MobileDataViewModel::class.java)
 
         viewModel.mobileData.observe(this, renderData)

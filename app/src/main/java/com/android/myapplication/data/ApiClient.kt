@@ -1,24 +1,20 @@
 package com.android.myapplication.data
 
-import com.android.myapplication.model.Response
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Query
 
 
 object ApiClient {
 
-    private const val API_BASE_URL = "https://data.gov.sg/"
+    const val BASE_URL = "https://data.gov.sg/"
 
-    private var servicesApiInterface: ServicesApiInterface? = null
+    private var servicesApiInterface: MobileDataApi? = null
 
-    fun build(): ServicesApiInterface? {
+    fun build(): MobileDataApi? {
         var builder: Retrofit.Builder = Retrofit.Builder()
-            .baseUrl(API_BASE_URL)
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
 
         var httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
@@ -26,20 +22,15 @@ object ApiClient {
 
         var retrofit: Retrofit = builder.client(httpClient.build()).build()
         servicesApiInterface = retrofit.create(
-            ServicesApiInterface::class.java
+            MobileDataApi::class.java
         )
 
-        return servicesApiInterface as ServicesApiInterface
+        return servicesApiInterface as MobileDataApi
     }
 
     private fun interceptor(): HttpLoggingInterceptor {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return httpLoggingInterceptor
-    }
-
-    interface ServicesApiInterface {
-        @GET("api/action/datastore_search")
-        fun mobileData(@Query("resource_id")resource_id:String, @Query("limit") limit: Int): Call<Response>
     }
 }

@@ -23,7 +23,7 @@ private var annualData: Map<String,String>, private var minVal: Boolean) :
 
     override fun onBindViewHolder(vh: MViewHolder, position: Int) {
         vh.bind(mobileData[position])
-        val data = annualData.getValue("quarter")
+        val data = annualData[mobileData[position].quarter]
         vh.txtQuarter.text = data
         if (minVal) {
             vh.imageView.isClickable = true
